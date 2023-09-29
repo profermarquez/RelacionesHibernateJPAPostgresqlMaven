@@ -6,7 +6,6 @@ package controladores;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import models.Usuario;
 
 /**
@@ -72,7 +71,6 @@ public class UsuarioDao {
                         System.out.println(sql);
                         int countUpdated = em.createNativeQuery(sql).executeUpdate();
                         if(countUpdated!=1){return "Error";} /// si es correcto da uno
-                        //System.out.println(countUpdated);
 			em.getTransaction().commit();
 		}
 		catch(Exception e) {System.out.println(e);}
@@ -89,11 +87,9 @@ public class UsuarioDao {
         List<Usuario> listEmployee=null;
         try {
 			em =Conexion.createEntityManager();
-			//if(em == null){System.out.println("Error..");return;}
 			em.getTransaction().begin();
 			listEmployee = em.createNativeQuery("SELECT id,nombre,direccion,apellido FROM usuarios", Usuario.class).getResultList();
 			em.getTransaction().commit();
-			//System.out.println("Listado de usuarios");
 		}
 		catch(Exception e) {System.out.println(e);}
 		finally {
